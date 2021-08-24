@@ -1,9 +1,9 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
+title: "(제목) : 내용"
+labels: todo
+assignees: NariP
 
 ---
 
