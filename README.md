@@ -1,4 +1,3 @@
 # testtemplate
 깃 관련 연습을 하는 레포 입니다.
-dev1 commit1
-dev1 commit2
+이건 그냥 머지
