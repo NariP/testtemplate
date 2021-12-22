@@ -7,11 +7,11 @@ describe('testMultiplication', () => {
   })
 
   test('$5 X 2 = 10', ()=>{
-    expect(new Dollar(10)).toBe(five.times(2))
+    expect(new Dollar(10).getAmount()).toBe(five.times(2).getAmount())
   } )
 
   test('$5 X 3 = 15', ()=>{
-    expect(new Dollar(15)).toBe(five.times(3))
+    expect(new Dollar(15).getAmount()).toBe(five.times(3).getAmount())
   } )
 
   test('test equality success', () => {
