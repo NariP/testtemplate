@@ -9,7 +9,7 @@ class Money {
     return new Dollar(this.#amount * multiplier)
   }
   equals(instance) {
-    return this.#amount === instance.getAmount()
+    return this.#amount === instance.getAmount() && this.constructor === instance.constructor
   }
   getAmount() {
     return this.#amount

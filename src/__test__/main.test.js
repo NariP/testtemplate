@@ -43,3 +43,9 @@ describe('test FrancMultiplication', () => {
     expect(new Franc(15).getAmount()).toBe(five.times(3).getAmount())
   } )
 })
+
+describe('test apple and orange', () => {
+  test('is Franc same to dollar', () => {
+    expect(new Franc(5).equals(new Dollar(5))).toBe(false)
+  })
+})
