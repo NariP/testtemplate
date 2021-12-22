@@ -3,7 +3,7 @@ import {Dollar} from '../main';
 describe('testMultiplication', () => {
   const five = new Dollar(5)
   test('Dollar5 = 5', () => {
-    expect(five.amount).toBe(5)
+    expect(five.getAmount()).toBe(5)
   })
 
   test('$5 X 2 = 10', ()=>{
@@ -19,5 +19,13 @@ describe('testMultiplication', () => {
   })
   test('test equality fail', () => {
     expect(new Dollar(5).equals(new Dollar(6))).toBe(false)
+  })
+
+  test('private property', () => {
+    expect(new Dollar(5).amount).toBeUndefined()
+  })
+
+  test('get private property', () => {
+    expect(new Dollar(5).getAmount()).toBe(5)
   })
 })
