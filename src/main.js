@@ -1,6 +1,6 @@
 export const multiplication = (a, b) => a * b
 
-export class Dollar {
+class Money {
   #amount
   constructor(num) {
     this.#amount = num
@@ -14,4 +14,12 @@ export class Dollar {
   getAmount() {
     return this.#amount
   }
+}
+
+export class Dollar extends Money{
+//
+}
+
+export class Franc extends Money{
+//
 }

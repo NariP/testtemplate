@@ -1,4 +1,4 @@
-import {Dollar} from '../main';
+import {Dollar, Franc} from '../main';
 
 describe('testMultiplication', () => {
   const five = new Dollar(5)
@@ -28,4 +28,18 @@ describe('testMultiplication', () => {
   test('get private property', () => {
     expect(new Dollar(5).getAmount()).toBe(5)
   })
+})
+
+describe('test FrancMultiplication', () => {
+  test('Franc', () => {
+    expect(new Franc(5).getAmount()).toBe(5)
+  })
+  const five = new Franc(5)
+  test('5CHF X 2 = 10', ()=>{
+    expect(new Franc(10).getAmount()).toBe(five.times(2).getAmount())
+  } )
+
+  test('5CHF X 3 = 15', ()=>{
+    expect(new Franc(15).getAmount()).toBe(five.times(3).getAmount())
+  } )
 })
