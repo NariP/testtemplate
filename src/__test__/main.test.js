@@ -1,3 +1,5 @@
+import {multiplication} from '../main';
+
 let temp;
 describe("simple test", () => {
   beforeEach(() => {
@@ -15,4 +17,10 @@ describe("simple test", () => {
   test('[1,2,3] is [1,2,3]', () => {
     expect([1,2,3]).toEqual(1);
   });
+})
+
+describe('testMultiplication', () => {
+  test('5 X 2 = 10', ()=>{
+    expect(multiplication(5, 2)).toBe(10)
+  } )
 })
