@@ -1,23 +1,4 @@
-import {multiplication, Dollar} from '../main';
-
-let temp;
-describe("simple test", () => {
-  beforeEach(() => {
-    temp = 1;
-  });
-
-  afterEach(() => {
-    temp = 0;
-  });
-
-  test('1 is 1', () => {
-    expect(1).toBe(1);
-  });
-
-  test('[1,2,3] is [1,2,3]', () => {
-    expect([1,2,3]).toEqual(1);
-  });
-})
+import {Dollar} from '../main';
 
 describe('testMultiplication', () => {
   const five = new Dollar(5)
@@ -34,4 +15,11 @@ describe('testMultiplication', () => {
   test('$5 X 3 = 15', ()=>{
     expect(product2.amount).toBe(15)
   } )
+
+  test('test equality success', () => {
+    expect(new Dollar(5).equals(new Dollar(5))).toBe(true)
+  })
+  test('test equality fail', () => {
+    expect(new Dollar(5).equals(new Dollar(6))).toBe(false)
+  })
 })
