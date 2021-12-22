@@ -1,0 +1,23 @@
+{
+  "name": "testtemplate",
+  "version": "1.0.0",
+  "description": "깃 관련 연습을 하는 레포 입니다. dev4 push dev5 다른 개발자가 열심히 작업  + 마스터",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node src/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NariP/testtemplate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NariP/testtemplate/issues"
+  },
+  "homepage": "https://github.com/NariP/testtemplate#readme",
+  "devDependencies": {
+    "jest": "^27.4.5"
+  }
+}
