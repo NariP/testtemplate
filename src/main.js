@@ -1,9 +1,15 @@
 export const multiplication = (a, b) => a * b
 
-export class Money {
+class Expression {
+  constructor() {
+  }
+}
+
+export class Money extends Expression{
   #amount
   #currency
   constructor(num, currency) {
+    super();
     this.#amount = num
     this.#currency = currency
   }
@@ -26,6 +32,13 @@ export class Money {
   franc(amount) {
     return new Money(amount, "CHF")
   }
+  plus(instance) {
+    const currency = instance.getCurrency()
+    const amount = instance.getAmount()
+
+    if(currency === 'USD') return new Money(amount + this.#amount, currency)
+    if(currency === 'CHF') return new Money(amount + this.#amount, currency)
+  }
 }
 
 export class Dollar extends Money{
@@ -34,4 +47,10 @@ export class Dollar extends Money{
 
 export class Franc extends Money{
 //
+}
+
+export class Bank {
+  reduce(amount, currency) {
+    return new Money().dollar(10)
+  }
 }

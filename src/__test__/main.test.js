@@ -1,4 +1,4 @@
-import {Dollar, Franc, Money} from '../main';
+import {Dollar, Franc, Money, Bank} from '../main';
 
 describe('testMultiplication', () => {
   const five = new Dollar(5)
@@ -53,4 +53,14 @@ describe('test apple and orange', () => {
 it('Dollar Franc 중복', () => {
   expect(new Money().dollar(5).equals(new Money().dollar(5))).toBeTruthy()
   expect(new Money().franc(5).equals(new Money().dollar(5))).toBeFalsy()
+})
+
+it('$5 + $5 = 10', () => {
+  const res = new Money().dollar(5).plus(new Money().dollar(5))
+  expect(new Money().dollar(10).equals(res)).toBeTruthy()
+  expect(new Money().franc(10).equals(res)).toBeFalsy()
+
+  const bank = new Bank()
+  const reduced = bank.reduce(res, 'USD')
+  expect(new Money().dollar(10).equals(reduced)).toBeTruthy()
 })
