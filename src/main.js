@@ -6,6 +6,9 @@ class Expression {
   reduce(bank, to) {
     //
   }
+  plus(addend) {
+    //
+  }
 }
 
 export class Money extends Expression{
@@ -35,10 +38,11 @@ export class Money extends Expression{
   franc(amount) {
     return new Money(amount, "CHF")
   }
-  plus(addend, instance) {
-    const currency = instance.getCurrency()
-    if(currency === 'USD') return new Sum(this.getAmount(), addend)
-    if(currency === 'CHF') return new Sum(this.getAmount(), addend)
+  plus(addend) {
+    return new Sum(this, addend)
+    // const currency = instance.getCurrency()
+    // if(currency === 'USD') return new Sum(this.getAmount(), addend)
+    // if(currency === 'CHF') return new Sum(this.getAmount(), addend)
   }
   reduce(bank, to) {
     const rate = bank.rate(this.#currency, to)
@@ -79,8 +83,12 @@ export class Sum extends Expression{
   }
 
   reduce(bank, to) {
-    const amount = this.augend.getAmount() + this.addend.getAmount()
+    const amount = this.augend.reduce(bank, to).getAmount() + this.addend.reduce(bank, to).getAmount()
     return new Money(amount, to)
+  }
+  plus(addend) {
+    // todo
+    return null
   }
 }
 

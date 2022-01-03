@@ -92,3 +92,14 @@ it('test identity rate ', function () {
   expect(bank.rate('USD', 'USD')).toBe(1)
   expect(bank.rate('CHF', 'USD')).toBe(2)
 });
+
+it('should $5 + 10CHF = $10', function () {
+  const fiveDollars = new Money().dollar(5)
+  const tenFrancs = new Money().franc(10)
+  const bank = new Bank()
+  bank.addRate('CHF', 'USD', 2)
+
+  const res = bank.reduce(fiveDollars.plus(tenFrancs), 'USD')
+  expect(new Money().dollar(10).getAmount()).toBe(res.getAmount())
+  expect(new Money().dollar(10).getCurrency()).toBe(res.getCurrency())
+});
