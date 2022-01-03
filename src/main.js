@@ -3,7 +3,7 @@ export const multiplication = (a, b) => a * b
 class Expression {
   constructor() {
   }
-  reduce(to) {
+  reduce(bank, to) {
     //
   }
 }
@@ -40,8 +40,9 @@ export class Money extends Expression{
     if(currency === 'USD') return new Sum(this.getAmount(), addend)
     if(currency === 'CHF') return new Sum(this.getAmount(), addend)
   }
-  reduce(to) {
-    return this
+  reduce(bank, to) {
+    const rate = bank.rate(this.#currency, to)
+    return new Money(this.#amount / rate, to)
   }
 }
 
@@ -54,11 +55,17 @@ export class Franc extends Money{
 }
 
 export class Bank {
+  #rates={}
   reduce(source, to) {
-    return source.reduce(to)
-    // if(source instanceof Money) return source.reduce(to)
-    // const sum = new Sum(source)
-    // return new sum.reduce(to)
+    return source.reduce(this, to)
+  }
+  addRate(from, to, rate) {
+    this.#rates[new Pair(from, to)] = rate
+  }
+  rate(from, to) {
+    if (from === to) return 1
+    const rate = this.#rates[new Pair(from, to)]
+    return rate
   }
 }
 
@@ -71,8 +78,23 @@ export class Sum extends Expression{
     this.addend = addend
   }
 
-  reduce(to) {
+  reduce(bank, to) {
     const amount = this.augend.getAmount() + this.addend.getAmount()
     return new Money(amount, to)
+  }
+}
+
+export class Pair {
+  #from
+  #to
+  constructor(from, to) {
+    this.#from = from
+    this.#to = to
+  }
+  equals(pair) {
+    return this.#from === pair.from && this.#to === pair.to
+  }
+  hashCode() {
+    return 0
   }
 }

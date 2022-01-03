@@ -78,3 +78,17 @@ it('test reduce Money', () => {
   const res = bank.reduce(new Money().dollar(1), 'USD')
   expect(new Money().dollar(1)).toStrictEqual(res)
 })
+
+it('test reduce money different currency', () => {
+  const bank = new Bank()
+  bank.addRate('CHF', 'USD', 2)
+  const res = bank.reduce(new Money().franc(4), 'USD')
+  expect(new Money().dollar(2).getAmount()).toBe(res.getAmount())
+})
+
+it('test identity rate ', function () {
+  const bank = new Bank()
+  bank.addRate('CHF', 'USD', 2)
+  expect(bank.rate('USD', 'USD')).toBe(1)
+  expect(bank.rate('CHF', 'USD')).toBe(2)
+});
