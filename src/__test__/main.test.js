@@ -1,4 +1,4 @@
-import {Dollar, Franc, Money, Bank} from '../main';
+import {Dollar, Franc, Money, Bank, Sum} from '../main';
 
 describe('testMultiplication', () => {
   const five = new Dollar(5)
@@ -63,4 +63,18 @@ it('$5 + $5 = 10', () => {
   const bank = new Bank()
   const reduced = bank.reduce(res, 'USD')
   expect(new Money().dollar(10).equals(reduced)).toBeTruthy()
+})
+
+
+it('진짜로 만들기', () => {
+  const sum = new Sum(new Money().dollar(3), new Money().dollar(4))
+  const bank = new Bank()
+  const res = bank.reduce(sum, 'USD')
+  expect(new Money().dollar(7)).toStrictEqual(res)
+})
+
+it('test reduce Money', () => {
+  const bank = new Bank()
+  const res = bank.reduce(new Money().dollar(1), 'USD')
+  expect(new Money().dollar(1)).toStrictEqual(res)
 })

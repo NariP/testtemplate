@@ -3,6 +3,9 @@ export const multiplication = (a, b) => a * b
 class Expression {
   constructor() {
   }
+  reduce(to) {
+    //
+  }
 }
 
 export class Money extends Expression{
@@ -32,12 +35,13 @@ export class Money extends Expression{
   franc(amount) {
     return new Money(amount, "CHF")
   }
-  plus(instance) {
+  plus(addend, instance) {
     const currency = instance.getCurrency()
-    const amount = instance.getAmount()
-
-    if(currency === 'USD') return new Money(amount + this.#amount, currency)
-    if(currency === 'CHF') return new Money(amount + this.#amount, currency)
+    if(currency === 'USD') return new Sum(this.getAmount(), addend)
+    if(currency === 'CHF') return new Sum(this.getAmount(), addend)
+  }
+  reduce(to) {
+    return this
   }
 }
 
@@ -50,7 +54,25 @@ export class Franc extends Money{
 }
 
 export class Bank {
-  reduce(amount, currency) {
-    return new Money().dollar(10)
+  reduce(source, to) {
+    return source.reduce(to)
+    // if(source instanceof Money) return source.reduce(to)
+    // const sum = new Sum(source)
+    // return new sum.reduce(to)
+  }
+}
+
+export class Sum extends Expression{
+  augend
+  addend
+  constructor(augend, addend) {
+    super()
+    this.augend = augend
+    this.addend = addend
+  }
+
+  reduce(to) {
+    const amount = this.augend.getAmount() + this.addend.getAmount()
+    return new Money(amount, to)
   }
 }
