@@ -88,7 +88,7 @@ export class Sum extends Expression{
   }
   plus(addend) {
     // todo
-    return null
+    return new Sum(this, addend)
   }
 }
 

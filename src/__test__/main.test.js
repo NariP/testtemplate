@@ -103,3 +103,14 @@ it('should $5 + 10CHF = $10', function () {
   expect(new Money().dollar(10).getAmount()).toBe(res.getAmount())
   expect(new Money().dollar(10).getCurrency()).toBe(res.getCurrency())
 });
+
+it('test sum plus money', function () {
+  const fiveBucks = new Money().dollar(5)
+  const tenFrancs = new Money().franc(10)
+  const bank = new Bank()
+  bank.addRate('CHF', 'USD', 2)
+  const sum = new Sum(fiveBucks, tenFrancs).plus(fiveBucks)
+  const res = bank.reduce(sum, 'USD')
+  expect(new Money().dollar(15)).toStrictEqual(res)
+
+});
