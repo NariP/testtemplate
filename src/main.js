@@ -9,6 +9,9 @@ class Expression {
   plus(addend) {
     //
   }
+  times (multiplier) {
+    //
+  }
 }
 
 export class Money extends Expression{
@@ -20,7 +23,7 @@ export class Money extends Expression{
     this.#currency = currency
   }
   times(multiplier) {
-    return new Money(this.#amount * multiplier)
+    return new Money(this.#amount * multiplier, this.#currency)
   }
   equals(instance) {
     return this.#amount === instance.getAmount()
@@ -87,8 +90,10 @@ export class Sum extends Expression{
     return new Money(amount, to)
   }
   plus(addend) {
-    // todo
     return new Sum(this, addend)
+  }
+  times(multiplier) {
+    return new Sum(this.augend.times(multiplier), this.addend.times(multiplier))
   }
 }
 

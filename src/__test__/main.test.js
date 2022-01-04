@@ -114,3 +114,14 @@ it('test sum plus money', function () {
   expect(new Money().dollar(15)).toStrictEqual(res)
 
 });
+
+it('should test sum times', function () {
+  const fiveBucks = new Money().dollar(5)
+  const tenFrancs = new Money().franc(10)
+  const bank = new Bank()
+  bank.addRate('CHF', 'USD', 2)
+  const sum = new Sum(fiveBucks, tenFrancs).times(2)
+  const res = bank.reduce(sum, 'USD')
+  expect(new Money().dollar(20).getAmount()).toStrictEqual(res.getAmount())
+  expect(new Money().dollar(20).getCurrency()).toStrictEqual(res.getCurrency())
+});
