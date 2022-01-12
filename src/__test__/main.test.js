@@ -125,3 +125,9 @@ it('should test sum times', function () {
   expect(new Money().dollar(20).getAmount()).toStrictEqual(res.getAmount())
   expect(new Money().dollar(20).getCurrency()).toStrictEqual(res.getCurrency())
 });
+
+it('should test same currency returns money', function () {
+  const sum = new Money().dollar(1).plus(new Money().dollar(1))
+  console.log(sum.constructor, new Money().constructor)
+  expect(sum instanceof Money).toBeTruthy()
+});
